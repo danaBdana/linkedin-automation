@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 
 import utilities.Base;
 
-public class myPage extends Base //how to initial all elements?
+public class myPage extends Base 
 {
 
 	@FindBy(how = How.ID, using = "profile_view_top_card_full_name")
@@ -26,15 +26,13 @@ public class myPage extends Base //how to initial all elements?
 	public WebElement search_bar_text;
 	
 	@FindBy(how = How.XPATH, using = "//*[@text='Automation']")
-	public static WebElement automation_skill;
+	public WebElement automation_skill;
 	
 	@FindBy(how = How.XPATH, using = "//*[@contentDescription='Back']")
 	public WebElement back_from_skills_btn;
 	
 	
-	
-	
-	public static void verifyElementExists()
+	public void verifyElementExists()
 	{
 		try 
 		{
@@ -49,7 +47,7 @@ public class myPage extends Base //how to initial all elements?
 	}
 	
 
-	public static isItMyName(String myName); // Y?
+	public void isItMyName() 
 	{
 		try 
 		{

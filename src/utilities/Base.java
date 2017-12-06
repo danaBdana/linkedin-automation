@@ -1,5 +1,9 @@
 package utilities;
+
 import java.io.File;
+
+import org.openqa.selenium.OutputType;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,28 +22,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import com.mongodb.MapReduceCommand.OutputType;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
 import PageObject.MyNetwork;
 import PageObject.homePage;
 import PageObject.myPage;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class Base 
 {
-	public static WebDriver driver;
+	
 	public static homePage hp;
 	public static myPage mp;
 	public static MyNetwork mnw;
 	public static ExtentReports extent;
 	public static ExtentTest test;
+	protected static AndroidDriver<AndroidElement> driver = null;
 	
 	public static String timeStamp = new SimpleDateFormat("yyy-MM-dd-HH-mm-ss").format(Calendar.getInstance().getTime());
 	
 	public static String getData (String nodeName) throws ParserConfigurationException, SAXException, IOException
 	{
-		File fXmlFile = new File("C:\\Users\\Dana\\Desktop\\Yoni\\myTestFileMobile.xml");
+		File fXmlFile = new File("C:\\Users\\Dana\\Desktop\\Yoni\\myExternalFileMobile.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(fXmlFile); 
@@ -80,7 +86,7 @@ public class Base
 	public static String takeSS() throws IOException, ParserConfigurationException, SAXException
 	{
 		String SSPath = getData("SSPath") + "screenshot_" + getRandomNumber() +".png";
-		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); //Y??
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
 		FileUtils.copyFile(scrFile, new File("C:\\Users\\user\\Desktop\\Automation\\ExtentReports\\TakesScreenshot\\screenshot.png")); //update location!!!
 		return SSPath;
 	}

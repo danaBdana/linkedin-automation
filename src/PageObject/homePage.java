@@ -25,7 +25,7 @@ public class homePage extends Base
 	@FindBy(how = How.ID, using = "sharing_compose_post_button")
 	public WebElement share_post_btn;
 	
-	public static void isItMyStatus()
+	public void isItMyStatus()
 	{
 		try 
 		{

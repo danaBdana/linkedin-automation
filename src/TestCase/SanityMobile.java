@@ -1,52 +1,40 @@
 package TestCase;
-
-//package <set your test package>;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import utilities.Base;
-
-import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 import org.xml.sax.SAXException;
-import org.openqa.selenium.By;
 import org.junit.*;
 import java.net.URL;
-
 import javax.xml.parsers.ParserConfigurationException;
-
-import static org.junit.Assert.*;
-
 import java.io.IOException;
-//import java.net.MalformedURLException;
-//import PageObject.homePage;
-//import PageObject.myPage;
-//import PageObject.MyNetwork;
-
-
 
 public class SanityMobile extends Base
 {
-	private String reportDirectory = "reports";
-	private String reportFormat = "xml";
-	private String testName = "Untitled";
-	protected AndroidDriver<AndroidElement> driver = null;
-	DesiredCapabilities dc = new DesiredCapabilities();
+	private static String reportDirectory = "reports"; //need to add path where should we save the report
+	private static String reportFormat = "xml"; 
+	private static String testName = "Untitled"; //name of the file
+	
+	static DesiredCapabilities dc = new DesiredCapabilities();
 	
 
 
-	@Before
-	public void setUp() throws ParserConfigurationException, SAXException, IOException {
+	@BeforeClass 
+	public static void setUp() throws ParserConfigurationException, SAXException, IOException 
+	{
 		dc.setCapability("reportDirectory", reportDirectory);
 		dc.setCapability("reportFormat", reportFormat);
 		dc.setCapability("testName", testName);
-		dc.setCapability(MobileCapabilityType.UDID, getData("MobileName"));
-		dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, getData("ApplicationName"));
-		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, getData("ApplicationPage"));
+		dc.setCapability(MobileCapabilityType.UDID, ("HT6AR0200003")); //getData("MobileName"));
+		dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, ("com.linkedin.android"));//getData("ApplicationName"));
+		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, (".authenticator.LaunchActivity"));//getData("ApplicationPage")); 
 		driver = new AndroidDriver<AndroidElement>(new URL("http://localhost:4723/wd/hub"), dc);
+		hp = PageFactory.initElements(driver, PageObject.homePage.class); //need to add more init elements to all classes
+		mp =  PageFactory.initElements(driver, PageObject.myPage.class);
+		mnw =  PageFactory.initElements(driver, PageObject.MyNetwork.class);
 	}
 
 	@Test
@@ -59,15 +47,15 @@ public class SanityMobile extends Base
 	public void Test2_verifyMyName() 
 	{
 		hp.me_launcher.click();
-		mp.isItMyName(); \\Y????
+		mp.isItMyName(); 
 	}
 
 	@Test
 	public void Test3_addAutomationSkillAndVerify()
 	{
 		hp.me_launcher.click();
-		driver.swipe(1000, 1750, 250, 650, 100); //how to move them to commonOps???
-		driver.swipe(1000, 1750, 250, 650, 100);
+		driver.swipe(1000, 1750, 250, 650, 100); //how to move them to commonOps??? 
+		driver.swipe(1000, 1750, 250, 650, 100); //driver.executeScript("client:client.swipeWhileNotFound(\"LEFT\", 200, 2000, 'NATIVE', \"xpath=//*[@Text='submit']\", 0, 1000, 5, true)");
 		driver.swipe(1000, 1750, 250, 650, 100);
 		driver.swipe(1000, 1750, 250, 650, 100);
 		driver.swipe(1000, 1750, 250, 650, 100);
@@ -84,7 +72,7 @@ public class SanityMobile extends Base
 		driver.swipe(1000, 1750, 250, 650, 100);
 		driver.swipe(1000, 1750, 250, 650, 100);
 		driver.swipe(1000, 1750, 250, 650, 100);
-		mp.verifyElementExists(); // Y it's unused?
+		mp.verifyElementExists(); 
 	}
 
 	@Test 
@@ -109,12 +97,6 @@ public class SanityMobile extends Base
 		hp.isItMyStatus();
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	@After
 	public void tearDown() {
