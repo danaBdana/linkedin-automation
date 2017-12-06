@@ -39,6 +39,7 @@ public class Base
 	public static MyNetwork mnw;
 	public static ExtentReports extent;
 	public static ExtentTest test;
+	public static commonOps cops;
 	protected static AndroidDriver<AndroidElement> driver = null;
 	
 	public static String timeStamp = new SimpleDateFormat("yyy-MM-dd-HH-mm-ss").format(Calendar.getInstance().getTime());

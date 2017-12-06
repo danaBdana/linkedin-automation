@@ -29,7 +29,10 @@ public class commonOps extends Base
 	}
 	
 	
-	
+	public void swipeDown_skill_edit_btn()
+	{
+		driver.executeScript("client:client.swipeWhileNotFound(\"UP\", 200, 2000, 'NATIVE', \"id=profile_view_top_skills_card_edit_bt\", 0, 1000, 9, true)");
+	}
 	
 	
 	

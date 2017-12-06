@@ -17,9 +17,9 @@ public class SanityMobile extends Base
 	private static String reportDirectory = "reports"; //need to add path where should we save the report
 	private static String reportFormat = "xml"; 
 	private static String testName = "Untitled"; //name of the file
-	
+
 	static DesiredCapabilities dc = new DesiredCapabilities();
-	
+
 
 
 	@BeforeClass 
@@ -32,20 +32,25 @@ public class SanityMobile extends Base
 		dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, ("com.linkedin.android"));//getData("ApplicationName"));
 		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, (".authenticator.LaunchActivity"));//getData("ApplicationPage")); 
 		driver = new AndroidDriver<AndroidElement>(new URL("http://localhost:4723/wd/hub"), dc);
-		hp = PageFactory.initElements(driver, PageObject.homePage.class); //need to add more init elements to all classes
-		mp =  PageFactory.initElements(driver, PageObject.myPage.class);
+
+		hp = PageFactory.initElements(driver, PageObject.homePage.class); 
+		mp =  PageFactory.initElements(driver, PageObject.myPage.class); 
 		mnw =  PageFactory.initElements(driver, PageObject.MyNetwork.class);
+
+		instanceReport();
 	}
 
 	@Test
 	public void Test1_whichKindOfApp()
 	{
+		initReportTest("Test1", "Test1_whichKindOfApp");
 		System.out.println(driver.getContext());
 	}
-	
+
 	@Test
 	public void Test2_verifyMyName() 
 	{
+		initReportTest("Test2", "Test2_verifyMyName");
 		hp.me_launcher.click();
 		mp.isItMyName(); 
 	}
@@ -53,16 +58,18 @@ public class SanityMobile extends Base
 	@Test
 	public void Test3_addAutomationSkillAndVerify()
 	{
+		initReportTest("Test3", "Test3_addAutomationSkillAndVerify");
 		hp.me_launcher.click();
-		driver.swipe(1000, 1750, 250, 650, 100); //how to move them to commonOps??? 
-		driver.swipe(1000, 1750, 250, 650, 100); //driver.executeScript("client:client.swipeWhileNotFound(\"LEFT\", 200, 2000, 'NATIVE', \"xpath=//*[@Text='submit']\", 0, 1000, 5, true)");
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
-		driver.swipe(1000, 1750, 250, 650, 100);
+		cops.swipeDown_skill_edit_btn();
+		//		driver.swipe(1000, 1750, 250, 650, 100); 
+		//		driver.swipe(1000, 1750, 250, 650, 100); 
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
+		//		driver.swipe(1000, 1750, 250, 650, 100);
 		mp.skill_edit_btn.click();
 		mp.add_skill_btn.click();
 		mp.search_bar_text.sendKeys("Automation");
@@ -78,6 +85,7 @@ public class SanityMobile extends Base
 	@Test 
 	public void Test4_addConnections() throws InterruptedException 
 	{
+		initReportTest("Test4", "Test4_addConnections");
 		hp.connection_tab.click();
 		mnw.add_connection_btn.click();
 		Thread.sleep(1000);
@@ -91,15 +99,23 @@ public class SanityMobile extends Base
 	@Test
 	public void Test5_writeAPost()
 	{
+		initReportTest("Test5", "Test5_writeAPost");
 		hp.write_post_btn.click();
 		hp.write_post_txtbox.sendKeys("Hey, this is an Automation test");
 		hp.share_post_btn.click();
 		hp.isItMyStatus();
-		
+
 	}
-	
 	@After
-	public void tearDown() {
+	public void doAfterTest()
+	{
+		finalizeReportTest();
+	}
+
+	@AfterClass
+	public void tearDown() 
+	{
+		finalizeExtentReport();
 		driver.quit();
 	}
 }
