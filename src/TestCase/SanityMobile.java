@@ -17,7 +17,7 @@ public class SanityMobile extends Base
 	private static String reportDirectory = "reports"; //need to add path where should we save the report
 	private static String reportFormat = "xml"; 
 	private static String testName = "Untitled"; //name of the file
-
+	
 	static DesiredCapabilities dc = new DesiredCapabilities();
 
 
@@ -61,15 +61,6 @@ public class SanityMobile extends Base
 		initReportTest("Test3", "Test3_addAutomationSkillAndVerify");
 		hp.me_launcher.click();
 		cops.swipeDown_skill_edit_btn();
-		//		driver.swipe(1000, 1750, 250, 650, 100); 
-		//		driver.swipe(1000, 1750, 250, 650, 100); 
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
-		//		driver.swipe(1000, 1750, 250, 650, 100);
 		mp.skill_edit_btn.click();
 		mp.add_skill_btn.click();
 		mp.search_bar_text.sendKeys("Automation");
@@ -113,7 +104,7 @@ public class SanityMobile extends Base
 	}
 
 	@AfterClass
-	public void tearDown() 
+	public static void tearDown() 
 	{
 		finalizeExtentReport();
 		driver.quit();

@@ -1,14 +1,21 @@
 package PageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import utilities.Base;
 
 public class homePage extends Base
 {
+	public homePage(AndroidDriver<AndroidElement> driver)
+	{
+		this.driver = driver;
+	}
 
 	@FindBy(how = How.ID, using = "me_launcher")
 	public WebElement me_launcher;

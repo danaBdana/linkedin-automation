@@ -1,13 +1,22 @@
 package PageObject;
 import static org.junit.Assert.assertEquals;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import utilities.Base;
 
 public class myPage extends Base 
 {
+	
+	public myPage(AndroidDriver<AndroidElement> driver)
+	{
+		this.driver = driver;
+	}
 
 	@FindBy(how = How.ID, using = "profile_view_top_card_full_name")
 	public WebElement my_name;
